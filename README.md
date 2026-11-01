@@ -16,7 +16,7 @@
 
 This project automates the [EduShop](https://github.com/BayanAlhassoun/E-Commerce-test-project-for-API---JMeter---Automation) Angular storefront using Selenium WebDriver, Java, JUnit 5, and Maven. Its 17 independent checks cover account validation, catalog filtering and sorting, wishlist and cart changes, checkout guards, and a complete new-customer purchase. The [test plan](docs/TEST_PLAN.md) lists each scenario.
 
-**Verified local run:** 17 tests passed, 0 failures, 0 errors on 1 November 2026 (Edge, headless, EduShop Docker environment). GitHub Actions runs the same suite on Ubuntu with headless Chrome.
+**Verified run:** 17 tests passed with no failures or errors on local headless Edge. GitHub Actions runs the suite on Ubuntu with headless Chrome; its current status appears in the badge above.
 
 ## Test flow
 
