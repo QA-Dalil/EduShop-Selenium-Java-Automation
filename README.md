@@ -12,7 +12,7 @@
 
 </div>
 
-## Project at a glance
+## Overview
 
 This project automates the [EduShop](https://github.com/BayanAlhassoun/E-Commerce-test-project-for-API---JMeter---Automation) Angular storefront using Selenium WebDriver, Java, JUnit 5, and Maven. It covers registration validation, invalid login, guest access, product browsing and search, plus a complete new-customer purchase. The [test plan](docs/TEST_PLAN.md) lists all seven checks.
 
@@ -63,11 +63,11 @@ src/test/java/com/qadalil/edushop/
 docs/TEST_PLAN.md
 docs/images/                 Two screenshots from the verified run
 pom.xml
-mvnw.cmd + .mvn/wrapper/   Maven Wrapper for Windows
+mvnw, mvnw.cmd, .mvn/wrapper/   Maven Wrapper
 ```
 
 ## Notes
 
 - The test target is local EduShop; no account credentials are committed.
 - The checkout UI offers Card, PayPal, BankTransfer, and CashOnDelivery. The journey uses CashOnDelivery; this is an order-placement test, not a payment gateway test.
-- Keep this suite separate from the [JMeter performance test](https://github.com/QA-Dalil/EduShop-JMeter-Performance-Testing): Selenium checks user-visible behavior, while JMeter measures API load.
+- Related project: [EduShop JMeter Performance Testing](https://github.com/QA-Dalil/EduShop-JMeter-Performance-Testing).
