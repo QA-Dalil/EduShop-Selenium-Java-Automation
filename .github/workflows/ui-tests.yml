@@ -1,0 +1,62 @@
+name: Selenium UI tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ui-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out tests
+        uses: actions/checkout@v4
+
+      - name: Check out EduShop
+        uses: actions/checkout@v4
+        with:
+          repository: BayanAlhassoun/E-Commerce-test-project-for-API---JMeter---Automation
+          ref: d76720bc9f379d442f0d4382f8794be4869dce5b
+          path: edushop-app
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Start EduShop
+        run: docker compose -f edushop-app/docker-compose.yml up --build -d
+
+      - name: Wait for the storefront and API
+        shell: bash
+        run: |
+          for i in {1..60}; do
+            if curl --silent --fail http://localhost:4200/ >/dev/null \
+              && curl --silent --fail 'http://localhost:5000/api/product?searchTerm=Laptop' >/dev/null; then
+              exit 0
+            fi
+            sleep 5
+          done
+          docker compose -f edushop-app/docker-compose.yml ps
+          docker compose -f edushop-app/docker-compose.yml logs --tail=100
+          exit 1
+
+      - name: Run browser tests
+        run: ./mvnw test -Dbrowser=chrome -Dheadless=true
+
+      - name: Upload test diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: selenium-test-diagnostics
+          path: |
+            target/surefire-reports/
+            target/failure-screenshots/
+          if-no-files-found: ignore
+
+      - name: Stop EduShop
+        if: always()
+        run: docker compose -f edushop-app/docker-compose.yml down
