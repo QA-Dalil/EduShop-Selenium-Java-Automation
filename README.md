@@ -14,10 +14,9 @@
 
 ## Overview
 
-This project automates the [EduShop](https://github.com/BayanAlhassoun/E-Commerce-test-project-for-API---JMeter---Automation) Angular storefront using Selenium WebDriver, Java, JUnit 5, and Maven. It covers registration validation, invalid login, guest access, product browsing and search, plus a complete new-customer purchase. The [test plan](docs/TEST_PLAN.md) lists all seven checks.
+This project automates the [EduShop](https://github.com/BayanAlhassoun/E-Commerce-test-project-for-API---JMeter---Automation) Angular storefront using Selenium WebDriver, Java, JUnit 5, and Maven. Its 17 independent checks cover account validation, catalog filtering and sorting, wishlist and cart changes, checkout guards, and a complete new-customer purchase. The [test plan](docs/TEST_PLAN.md) lists each scenario.
 
-**Verified local run:** 7 tests passed, 0 failures, 0 errors on 1 November 2026 (Edge, headless, EduShop Docker environment).
-The GitHub Actions workflow also passed on Ubuntu with headless Chrome.
+**Verified local run:** 17 tests passed, 0 failures, 0 errors on 1 November 2026 (Edge, headless, EduShop Docker environment). GitHub Actions runs the same suite on Ubuntu with headless Chrome.
 
 ## Test flow
 
@@ -26,13 +25,13 @@ Register unique customer → log out and sign in → browse product → view rev
 → search → add to cart → checkout → verify order → logout
 ```
 
-The tests use page objects, explicit waits, a new browser for each test, unique email addresses, and screenshots on failure. Selenium Manager handles browser drivers automatically.
+The tests use page objects, explicit waits, a new browser for each test, unique email addresses for authenticated scenarios, and screenshots on failure. Selenium Manager handles browser drivers automatically.
 
 ## Run locally
 
 1. Install JDK 17+; use Edge or Chrome. The included Maven Wrapper downloads Maven automatically.
 2. Start the EduShop app from its source repository with `docker compose up --build` and wait for `http://localhost:4200` and `http://localhost:5000`.
-3. Make sure the seeded Laptop product is in stock. The checkout test creates a real local order and consumes one unit.
+3. Use a disposable database with seeded products. The checkout test creates a real local order and consumes one Laptop unit; refresh seed data or replenish stock if repeated runs exhaust it. The cart tests add stocked Books products and do not place orders.
 4. In this repository, run:
 
 ```powershell
@@ -59,7 +58,7 @@ Test results appear in `target/surefire-reports/`. Failure screenshots appear in
 src/test/java/com/qadalil/edushop/
   pages/       Page objects for the real Angular screens
   support/     Browser lifecycle and failure screenshots
-  tests/       Authentication, catalog, and purchase scenarios
+  tests/       Authentication, catalog, shopping, and purchase scenarios
 docs/TEST_PLAN.md
 docs/images/                 Two screenshots from the verified run
 pom.xml
