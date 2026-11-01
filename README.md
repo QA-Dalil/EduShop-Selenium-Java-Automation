@@ -8,6 +8,7 @@
 ![Java](https://img.shields.io/badge/Java-17%2B-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
 ![JUnit](https://img.shields.io/badge/JUnit-5-25A162?style=flat-square)
 ![Maven](https://img.shields.io/badge/Maven-3.10-C71A36?style=flat-square&logo=apachemaven&logoColor=white)
+[![Selenium UI tests](https://github.com/QA-Dalil/EduShop-Selenium-Java-Automation/actions/workflows/ui-tests.yml/badge.svg)](https://github.com/QA-Dalil/EduShop-Selenium-Java-Automation/actions/workflows/ui-tests.yml)
 
 </div>
 
@@ -16,6 +17,7 @@
 This project automates the [EduShop](https://github.com/BayanAlhassoun/E-Commerce-test-project-for-API---JMeter---Automation) Angular storefront using Selenium WebDriver, Java, JUnit 5, and Maven. It covers registration validation, invalid login, guest access, product browsing and search, plus a complete new-customer purchase. The [test plan](docs/TEST_PLAN.md) lists all seven checks.
 
 **Verified local run:** 7 tests passed, 0 failures, 0 errors on 1 November 2026 (Edge, headless, EduShop Docker environment).
+The GitHub Actions workflow also passed on Ubuntu with headless Chrome.
 
 ## Test flow
 
