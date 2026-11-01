@@ -25,13 +25,13 @@ Register unique customer → log out and sign in → browse product → view rev
 → search → add to cart → checkout → verify order → logout
 ```
 
-The tests use page objects, explicit waits, a new browser for each test, unique email addresses for authenticated scenarios, and screenshots on failure. Selenium Manager handles browser drivers automatically.
+The tests use page objects, explicit waits, a new browser for each test, unique email addresses for authenticated scenarios, and screenshots on failure. The purchase test checks product stock through the API before starting and verifies the placed order through a customer-authenticated API request. Selenium Manager handles browser drivers automatically.
 
 ## Run locally
 
 1. Install JDK 17+; use Edge or Chrome. The included Maven Wrapper downloads Maven automatically.
 2. Start the EduShop app from its source repository with `docker compose up --build` and wait for `http://localhost:4200` and `http://localhost:5000`.
-3. Use a disposable database with seeded products. The checkout test creates a real local order and consumes one Laptop unit; refresh seed data or replenish stock if repeated runs exhaust it. The cart tests add stocked Books products and do not place orders.
+3. Use a disposable database with seeded products. The checkout test creates a real local order and consumes one Laptop unit. It checks stock before running. If stock is below five, set `EDUSHOP_ADMIN_EMAIL` and `EDUSHOP_ADMIN_PASSWORD` in your local environment so the test can restore it to 25 through the admin API. The cart tests add stocked Books products and do not place orders.
 4. In this repository, run:
 
 ```powershell
@@ -41,10 +41,10 @@ The tests use page objects, explicit waits, a new browser for each test, unique 
 Optional configuration:
 
 ```powershell
-.\mvnw.cmd test -Dbrowser=chrome -Dheadless=false -DbaseUrl=http://localhost:4200
+.\mvnw.cmd test -Dbrowser=chrome -Dheadless=false -DbaseUrl=http://localhost:4200 -DapiUrl=http://localhost:5000
 ```
 
-Test results appear in `target/surefire-reports/`. Failure screenshots appear in `target/failure-screenshots/`. Both folders are ignored by Git.
+Test results appear in `target/surefire-reports/`. Failure screenshots appear in `target/failure-screenshots/`. Both folders are ignored by Git. GitHub Actions uploads the reports and screenshots as a workflow artifact after every run, including successful runs.
 
 ## Evidence
 
