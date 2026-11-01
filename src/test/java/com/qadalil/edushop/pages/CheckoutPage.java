@@ -19,6 +19,13 @@ public final class CheckoutPage extends BasePage {
 
   public String confirmation() { return visible(By.xpath("//p[contains(.,'Your order #')]")).getText(); }
 
+  public int orderId() {
+    String message = confirmation();
+    java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("Your order #(\\d+)").matcher(message);
+    if (!matcher.find()) throw new IllegalStateException("Order confirmation has no numeric ID: " + message);
+    return Integer.parseInt(matcher.group(1));
+  }
+
   public CheckoutPage submitWithoutAddress() {
     click(By.xpath("//button[normalize-space()='Place Order']"));
     visible(By.xpath("//div[normalize-space()='Shipping address is required.']"));
