@@ -47,14 +47,15 @@ jobs:
       - name: Run browser tests
         run: ./mvnw test -Dbrowser=chrome -Dheadless=true
 
-      - name: Upload test diagnostics
-        if: failure()
+      - name: Upload test results and screenshots
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: selenium-test-diagnostics
+          name: selenium-test-results
           path: |
             target/surefire-reports/
             target/failure-screenshots/
+            target/evidence/
           if-no-files-found: ignore
 
       - name: Stop EduShop
