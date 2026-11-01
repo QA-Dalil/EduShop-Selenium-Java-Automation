@@ -15,6 +15,8 @@
 
 This project automates the [EduShop](https://github.com/BayanAlhassoun/E-Commerce-test-project-for-API---JMeter---Automation) Angular storefront using Selenium WebDriver, Java, JUnit 5, and Maven. It covers registration validation, invalid login, guest access, product browsing and search, plus a complete new-customer purchase. The [test plan](docs/TEST_PLAN.md) lists all seven checks.
 
+**Verified local run:** 7 tests passed, 0 failures, 0 errors on 1 November 2026 (Edge, headless, EduShop Docker environment).
+
 ## Test flow
 
 ```text
@@ -43,6 +45,12 @@ Optional configuration:
 
 Test results appear in `target/surefire-reports/`. Failure screenshots appear in `target/failure-screenshots/`. Both folders are ignored by Git.
 
+## Evidence
+
+| Category browsing | Order confirmation |
+| --- | --- |
+| ![Books category filtered in EduShop](docs/images/books-category.png) | ![Successful customer order](docs/images/order-confirmation.png) |
+
 ## Structure
 
 ```text
@@ -51,6 +59,7 @@ src/test/java/com/qadalil/edushop/
   support/     Browser lifecycle and failure screenshots
   tests/       Authentication, catalog, and purchase scenarios
 docs/TEST_PLAN.md
+docs/images/                 Two screenshots from the verified run
 pom.xml
 mvnw.cmd + .mvn/wrapper/   Maven Wrapper for Windows
 ```

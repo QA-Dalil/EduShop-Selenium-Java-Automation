@@ -21,8 +21,9 @@ public final class HomePage extends BasePage {
 
   public HomePage category(String name) {
     new Select(visible(By.cssSelector(".filter-bar select.form-select:first-of-type"))).selectByValue(name);
-    wait.until(ExpectedConditions.textToBePresentInElementLocated(
-        By.cssSelector(".product-card .category-badge"), name));
+    wait.until(driver -> !driver.findElements(By.cssSelector(".product-card .category-badge")).isEmpty()
+        && driver.findElement(By.cssSelector(".product-card .category-badge"))
+            .getText().equalsIgnoreCase(name));
     return this;
   }
 
@@ -50,7 +51,9 @@ public final class HomePage extends BasePage {
     for (WebElement product : products) {
       WebElement add = product.findElement(By.cssSelector("button.btn-primary"));
       if (add.isEnabled()) {
-        add.click();
+        ((org.openqa.selenium.JavascriptExecutor) driver)
+            .executeScript("arguments[0].scrollIntoView({block: 'center'});", add);
+        clickable(By.cssSelector(".product-card button.btn-primary:not([disabled])")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert-success")));
         return this;
       }

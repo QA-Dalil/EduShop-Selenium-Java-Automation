@@ -2,6 +2,7 @@ package com.qadalil.edushop.support;
 
 import java.time.Duration;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -27,6 +28,7 @@ public final class BrowserSession {
     } else {
       throw new IllegalArgumentException("Supported browsers: edge, chrome. Got: " + browser);
     }
+    driver.manage().window().setSize(new Dimension(1440, 1200));
     driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
     return driver;
   }
