@@ -24,6 +24,16 @@ public final class Navigation extends BasePage {
         By.cssSelector(".product-card .card-title"), productName));
   }
 
+  public Navigation removeFirstWish() {
+    click(By.cssSelector(".product-card button.btn-outline-danger"));
+    visible(By.xpath("//h4[normalize-space()='Your wishlist is empty']"));
+    return this;
+  }
+
+  public boolean wishlistIsEmpty() {
+    return visible(By.xpath("//h4[normalize-space()='Your wishlist is empty']")).isDisplayed();
+  }
+
   public Navigation logout() {
     click(By.cssSelector("nav .dropdown-toggle"));
     click(By.cssSelector("nav .dropdown-menu .text-danger"));

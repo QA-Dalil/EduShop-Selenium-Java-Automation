@@ -19,6 +19,21 @@ public final class CheckoutPage extends BasePage {
 
   public String confirmation() { return visible(By.xpath("//p[contains(.,'Your order #')]")).getText(); }
 
+  public CheckoutPage submitWithoutAddress() {
+    click(By.xpath("//button[normalize-space()='Place Order']"));
+    visible(By.xpath("//div[normalize-space()='Shipping address is required.']"));
+    return this;
+  }
+
+  public boolean addressRequired() {
+    return visible(By.xpath("//div[normalize-space()='Shipping address is required.']")).isDisplayed();
+  }
+
+  public boolean placeOrderDisabled() {
+    visible(By.xpath("//h2[contains(.,'Checkout')]"));
+    return !visible(By.xpath("//button[normalize-space()='Place Order']")).isEnabled();
+  }
+
   public CheckoutPage openOrders() {
     click(By.cssSelector("a[href='/orders']"));
     pathIs("/orders");

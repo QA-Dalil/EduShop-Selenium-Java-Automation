@@ -19,4 +19,27 @@ public final class CartPage extends BasePage {
     click(By.cssSelector("a[href='/checkout']"));
     return new CheckoutPage(driver);
   }
+
+  public int totalItems() {
+    return Integer.parseInt(visible(By.xpath("//h5[normalize-space()='Order Summary']/following-sibling::div[1]/span[1]"))
+        .getText().replaceAll("[^0-9]", ""));
+  }
+
+  public CartPage increaseFirstQuantity() {
+    click(By.xpath("(//div[contains(@class,'border-bottom')][.//button[normalize-space()='+']]//button[normalize-space()='+'])[1]"));
+    wait.until(driver -> totalItems() >= 2);
+    return this;
+  }
+
+  public CartPage removeFirstItem() {
+    click(By.cssSelector(".border-bottom button.btn-outline-danger"));
+    wait.until(driver -> !hasItems());
+    return this;
+  }
+
+  public CartPage clear() {
+    click(By.xpath("//button[contains(normalize-space(.),'Clear Cart')]"));
+    wait.until(driver -> !hasItems());
+    return this;
+  }
 }
