@@ -27,6 +27,23 @@ public final class AuthTests extends UiTest {
   }
 
   @Test
+  void registerRejectsInvalidEmail() {
+    AuthPage page = new AuthPage(driver).openRegister();
+    page.register("Rahaf", "Test", "not-an-email", "TestPass123!", "TestPass123!");
+    assertTrue(page.validation().contains("Valid email is required"));
+    assertTrue(driver.getCurrentUrl().endsWith("/register"));
+  }
+
+  @Test
+  void registerRejectsShortPassword() {
+    AuthPage page = new AuthPage(driver).openRegister();
+    page.register("Rahaf", "Test", "short@example.com", "123", "123");
+    assertTrue(driver.getCurrentUrl().endsWith("/register"));
+    assertTrue(driver.findElement(org.openqa.selenium.By.cssSelector("[formcontrolname='password']"))
+        .getAttribute("class").contains("is-invalid"));
+  }
+
+  @Test
   void invalidLoginShowsError() {
     AuthPage page = new AuthPage(driver).openLogin();
     page.login("missing.user@example.com", "WrongPass123!");
