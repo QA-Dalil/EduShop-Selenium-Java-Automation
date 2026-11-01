@@ -69,4 +69,5 @@ mvnw, mvnw.cmd, .mvn/wrapper/   Maven Wrapper
 
 - The test target is local EduShop; no account credentials are committed.
 - The checkout UI offers Card, PayPal, BankTransfer, and CashOnDelivery. The journey uses CashOnDelivery; this is an order-placement test, not a payment gateway test.
+- Tracked backend finding: [Order API omits the customer's email and name for their own order](https://github.com/QA-Dalil/EduShop-Selenium-Java-Automation/issues/1).
 - Related project: [EduShop JMeter Performance Testing](https://github.com/QA-Dalil/EduShop-JMeter-Performance-Testing).
